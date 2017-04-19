@@ -9,7 +9,7 @@ A:  Constraint propagation implements the same constraint as many times as possi
 
 <img src="https://d17h27t6h515a5.cloudfront.net/topher/2017/January/5877cc63_naked-twins/naked-twins.png" width="350" height="350" />
 
-   The strategy is first to identify a pair of boxes(called ***naked twns**) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers as shown in the code block below.
+   The strategy is first to identify a pair of boxes(called ***naked twns***) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers as shown in the code block below.
    
 ```
 def naked_twins(values):
