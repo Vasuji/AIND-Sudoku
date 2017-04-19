@@ -51,9 +51,28 @@ def naked_twins(values):
 
 
 # Question 2 (Diagonal Sudoku)
-Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
+***Q: How do we use constraint propagation to solve the diagonal sudoku problem?***
+A: For diagonal sudoku, one can introduce two new diagonal units and add them to the unit list. On doing this all the diagonal entries will have the corresponding diagonal entries as their peers.Technically, two new constraints are created: the digits 1-9 must appear only once in each of these new units. Each box along the diagonal now belongs to another unit and now has new peers as shown in the code block below:
 
+```
+   
+boxes = cross(rows, cols)
 
+row_units = [cross(r, cols) for r in rows]
+column_units = [cross(rows, c) for c in cols]
+square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
+dig1_units = [[rows[i]+cols[i] for i in range(len(rows))]]
+dig2_units = [[rows[i]+cols_rev[i] for i in range(len(rows))]]
+
+unitlist = row_units + column_units + square_units + dig1_units + dig2_units
+
+units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
+peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
+    
+
+```
+
+   Finally,the strategies like: elimination, only choice, and naked twins do not change on adding diagonal units. There is just another set of constraints to enforce. More specifically, more units and peers of which to be aware. We continue the process of enforcing a constraint to reduce the search space to enforce more constraints to find a solution.
 
 
 
