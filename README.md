@@ -5,15 +5,45 @@
 ***Q: How do we use constraint propagation to solve the naked twins problem?***  
 
 
-A:  Constraint propagation implements the same constraint as many times as possible until a solution is obtained, or the dead end where constraint can no longer be applied to refine the solution.
-
-In sudoku, we apply naked twins as local constraint to reduce the number of possibilities in the search space.
-
-The strategy is first to identify a pair of boxes(called naked twns) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers.
+A:  Constraint propagation implements the same constraint as many times as possible until a solution is obtained, or the dead end where constraint can no longer be applied to refine the solution. In sudoku, we apply naked twins as local constraint to reduce the number of possibilities in the search space.
 
 <img src="https://d17h27t6h515a5.cloudfront.net/topher/2017/January/5877cc63_naked-twins/naked-twins.png" width="350" height="350" />
 
-   Naked twins along with other strategy gives us the opportunity to enforce constraints in other parts of the grid that were previously unidentifiable, whether it is using the naked twins strategy again or a different strategy. These steps occurs in a chain and get us closer to a grid where each box only has one possible digit remaining, i.e., a solution.
+   The strategy is first to identify a pair of boxes(called naked twns) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers as shown in the figure below.
+   
+```
+def naked_twins(values):
+    """Eliminate values using the naked twins strategy.
+    Args:
+        values(dict): a dictionary of the form {'box_name': '123456789', ...}
+    Returns:
+        the values dictionary with the naked twins eliminated from peers.
+    """
+
+    # selecting boxes with 2 entries
+    potential_twins = [box for box in values.keys() if len(values[box]) == 2]
+    
+    # Collecting boxes having the same elements
+    naked_twins = [[box1,box2] for box1 in potential_twins \
+                    for box2 in peers[box1] \
+                    if set(values[box1])==set(values[box2]) ]
+
+    # Going through naked twins,
+    for i in range(len(naked_twins)):
+        box1 = naked_twins[i][0]
+        box2 = naked_twins[i][1]
+        # finding intersection of peers
+        peers_intersection = set(peers[box1]) & set(peers[box2])
+        #Delete the two digits in naked twins from all common peers.
+        for peer_value in peers_intersection:
+            if len(values[peer_value])>2:
+                for remove_value in values[box1]:
+                    values = assign_value(values, peer_value, values[peer_value].replace(remove_value,''))
+    return values
+ ```   
+
+
+   Naked twins along with other strategy gives us the opportunity to enforce constraints in other parts of the grid(i.e. propagation of constraint) that were previously unidentifiable, whether it is using the naked twins strategy again or a different strategy. These steps occurs in a chain and get us closer to a grid where each box only has one possible digit remaining, i.e., a solution as shown in figure below:
 
 <img src="images/chain.png" width="700" height="300" />
 
