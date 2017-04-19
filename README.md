@@ -52,6 +52,7 @@ def naked_twins(values):
 
 # Question 2 (Diagonal Sudoku)
 ***Q: How do we use constraint propagation to solve the diagonal sudoku problem?***
+
 A: For diagonal sudoku, one can introduce two new diagonal units and add them to the unit list. On doing this all the diagonal entries will have the corresponding diagonal entries as their peers.Technically, two new constraints are created: the digits 1-9 must appear only once in each of these new units. Each box along the diagonal now belongs to another unit and now has new peers as shown in the code block below:
 
 ```
@@ -76,7 +77,7 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 
-
+------------------
 
 
 ### Install
