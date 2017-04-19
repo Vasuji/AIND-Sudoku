@@ -16,7 +16,7 @@ The strategy is first to identify a pair of boxes(called naked twns) belonging t
    Naked twins along with other strategy gives us the opportunity to enforce constraints in other parts of the grid that were previously unidentifiable, whether it is using the naked twins strategy again or a different strategy. These steps occurs in a chain and get us closer to a grid where each box only has one possible digit remaining, i.e., a solution.
 
 
-![a](chain.png)
+![a](images/chain.png)
 
 
 
