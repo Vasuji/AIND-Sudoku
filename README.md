@@ -9,7 +9,7 @@ A:  Constraint propagation implements the same constraint as many times as possi
 
 <img src="https://d17h27t6h515a5.cloudfront.net/topher/2017/January/5877cc63_naked-twins/naked-twins.png" width="350" height="350" />
 
-   The strategy is first to identify a pair of boxes(called naked twns) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers as shown in the figure below.
+   The strategy is first to identify a pair of boxes(called naked twns) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers as shown in the code block below.
    
 ```
 def naked_twins(values):
@@ -32,9 +32,9 @@ def naked_twins(values):
     for i in range(len(naked_twins)):
         box1 = naked_twins[i][0]
         box2 = naked_twins[i][1]
-        # finding intersection of peers
+        # Step -I: Finding intersection of peers
         peers_intersection = set(peers[box1]) & set(peers[box2])
-        #Delete the two digits in naked twins from all common peers.
+        # Step-II: Delete the two digits in naked twins from all common peers.
         for peer_value in peers_intersection:
             if len(values[peer_value])>2:
                 for remove_value in values[box1]:
