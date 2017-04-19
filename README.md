@@ -3,11 +3,34 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+
+
+A:  Constraint propagation implements the same constraint as many times as possible until a solution is obtained, or the dead end where constraint can no longer be applied to refine the solution.
+
+In sudoku, we apply naked twins as local constraint to reduce the number of possibilities in the search space.
+
+The strategy is first to identify a pair of boxes(called naked twns) belonging to the same set of peers that have the same 2 numbers as possibilities. Then secondly these two numbers are eleminated from the digit possibilities of all the boxes that have these two boxes as peers.
+
+![a](https://d17h27t6h515a5.cloudfront.net/topher/2017/January/5877cc63_naked-twins/naked-twins.png)
+
+   Naked twins along with other strategy gives us the opportunity to enforce constraints in other parts of the grid that were previously unidentifiable, whether it is using the naked twins strategy again or a different strategy. These steps occurs in a chain and get us closer to a grid where each box only has one possible digit remaining, i.e., a solution.
+
+
+![a]
+
+
+
+
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+
+
+
+
+
+
+
 
 ### Install
 
