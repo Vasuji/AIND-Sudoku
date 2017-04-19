@@ -55,8 +55,8 @@ def naked_twins(values):
 
 A: For diagonal sudoku, one can introduce two new diagonal units and add them to the unit list. On doing this all the diagonal entries will have the corresponding diagonal entries as their peers.Technically, two new constraints are created: 
 
-   * (i) the digits 1-9 must appear only once in each of these new units,
-   * (ii) each box along the diagonal now belongs to another unit and now has new peers as shown in the code block below:
+   * the digits 1-9 must appear only once in each of these new units,
+   * each box along the diagonal now belongs to another unit and now has new peers as shown in the code block below:
 
 ```
    
